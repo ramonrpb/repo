@@ -24,7 +24,7 @@ public class GitUtil {
 	}
 	
 	public static void runCommand(Path directory, String... command) throws IOException, InterruptedException {
-		Objects.requireNonNull(directory, "directory");
+//		Objects.requireNonNull(directory, "directory");
 		if (!Files.exists(directory)) {
 			Files.createDirectory(directory);
 		}
