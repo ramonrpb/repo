@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,6 +26,7 @@ import br.com.ramon.barros.repo.utils.GitUtil;
 
 @RestController
 @RequestMapping(value = "/git")
+@CrossOrigin
 public class GitController {
 
 	static Logger log = Logger.getLogger(GitUtil.class.getName());
