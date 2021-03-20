@@ -43,20 +43,17 @@ public class GitController {
 		try {
 			Path dir = Files.createTempDirectory("tmp");
 			log.info(">>>>>>>>>>>>>>>>>>>>>> Temp Dir: "+ dir);
+			log.info(">>>>>>>>>>>>>>>>>>>>>> Temp Dir: "+ dir.getParent().toString());
+			String directory = System.getProperty("user.dir");
+			File f = new File(dir.getParent().toString());
+			List<File> list	=Arrays.asList(f.listFiles());
+	        log.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Directory: " + directory);
+	        
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		String directory = System.getProperty("user.dir");
-		File f = new File(directory);
-		try {
-			Files.createTempDirectory(directory);
-		} catch (IOException e) {
-			log.info(">>>>>>>>>>>>>>>>>>>>>>>>>> Não criou o tmp dir");
-			e.printStackTrace();
-		}
-		List<File> list	=Arrays.asList(f.listFiles());
-        log.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Directory: " + directory);
+		
         return ResponseEntity.ok().body(list);
 	}
 }
