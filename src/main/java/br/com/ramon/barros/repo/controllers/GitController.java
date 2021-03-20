@@ -1,5 +1,8 @@
 package br.com.ramon.barros.repo.controllers;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Logger;
@@ -33,10 +36,11 @@ public class GitController {
 	}
 	
 	@GetMapping
-	public ResponseEntity<String> findDirectory(){
+	public ResponseEntity<List<File>> findDirectory(){
 		String directory = System.getProperty("user.dir");
+		File f = new File(directory);
+		List<File> list	=Arrays.asList(f.listFiles());
         log.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Directory: " + directory);
-        log.warning(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Directory: " + directory);
-        return ResponseEntity.ok().body(directory);
+        return ResponseEntity.ok().body(list);
 	}
 }
