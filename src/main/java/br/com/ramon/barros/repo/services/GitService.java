@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -25,9 +26,12 @@ public class GitService {
 	public HashMap<String, List<FileDTO>> cloneRepository(String url) {
 		String[] values = url.split("/");
 		String name = values[values.length - 1].replace(".git", "");
-		String directoryPath = "tmp\\temp\\" + name;
-		Path directory = Paths.get(directoryPath);
+		
 		try {
+			Path dir = Files.createTempDirectory("tmp");
+			String directoryPath = dir.getParent().toString() + name;
+			Path directory = Paths.get(directoryPath);
+			
 			File file = new File(directoryPath);
 			if (!file.exists()) {
 				GitUtil.gitClone(directory, url);

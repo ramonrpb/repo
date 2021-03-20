@@ -45,10 +45,8 @@ public class GitController {
 			Path dir = Files.createTempDirectory("tmp");
 			log.info(">>>>>>>>>>>>>>>>>>>>>> Temp Dir: "+ dir);
 			log.info(">>>>>>>>>>>>>>>>>>>>>> Temp Dir: "+ dir.getParent().toString());
-			String directory = System.getProperty("user.dir");
 			File f = new File(dir.getParent().toString());
-			list	=Arrays.asList(f.listFiles());
-	        log.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Directory: " + directory);
+			list = Arrays.asList(f.listFiles());
 	        
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
