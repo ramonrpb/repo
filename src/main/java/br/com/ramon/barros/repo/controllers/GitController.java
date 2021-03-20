@@ -1,6 +1,8 @@
 package br.com.ramon.barros.repo.controllers;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -39,6 +41,12 @@ public class GitController {
 	public ResponseEntity<List<File>> findDirectory(){
 		String directory = "\\app\\tmp";
 		File f = new File(directory);
+		try {
+			Files.createTempDirectory(directory);
+		} catch (IOException e) {
+			log.info(">>>>>>>>>>>>>>>>>>>>>>>>>> Não criou o tmp dir");
+			e.printStackTrace();
+		}
 		List<File> list	=Arrays.asList(f.listFiles());
         log.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Directory: " + directory);
         return ResponseEntity.ok().body(list);
