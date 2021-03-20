@@ -37,8 +37,8 @@ public class GitController {
 	
 	@GetMapping
 	public ResponseEntity<List<File>> findDirectory(){
-		String directory = System.getProperty("user.dir");
-		File f = new File("\\tmp");
+		String directory = "\\app\\tmp";
+		File f = new File(directory);
 		List<File> list	=Arrays.asList(f.listFiles());
         log.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Directory: " + directory);
         return ResponseEntity.ok().body(list);
