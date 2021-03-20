@@ -29,7 +29,7 @@ public class GitService {
 		
 		try {
 			Path dir = Files.createTempDirectory("tmp");
-			String directoryPath = dir.getParent().toString()+"\\" + name;
+			String directoryPath = dir.toString()+"\\" + name;
 			Path directory = Paths.get(directoryPath);
 			
 			File file = new File(directoryPath);
