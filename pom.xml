@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>br.com.ramon.barros</groupId>
 	<artifactId>repo</artifactId>
-	<version>1.0.0</version>
+	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>repo</name>
 	
@@ -52,10 +52,6 @@
 			<plugin>
 			    <groupId>org.springframework.boot</groupId>
 			    <artifactId>spring-boot-maven-plugin</artifactId>
-			    <configuration>
-			        <mainClass>controller.Application</mainClass>
-			        <layout>ZIP</layout>
-			    </configuration>
 			    <executions>
 			        <execution>
 			            <goals>
