@@ -6,7 +6,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Objects;
 import java.util.logging.Logger;
 
 public class GitUtil {
@@ -14,12 +13,6 @@ public class GitUtil {
 	static Logger log = Logger.getLogger(GitUtil.class.getName());
 
 	public static void gitClone(Path directory, String originUrl) throws IOException, InterruptedException {
-		log.info("###### gitClone - directory: "+ directory);
-		log.info("###### gitClone - originUrl: "+ originUrl);
-		
-		log.warning("###### gitClone - directory: "+ directory);
-		log.warning("###### gitClone - originUrl: "+ originUrl);
-		
 		runCommand(directory.getParent(), "git", "clone", originUrl, directory.getFileName().toString());
 	}
 	
