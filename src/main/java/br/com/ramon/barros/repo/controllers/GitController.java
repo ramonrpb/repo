@@ -3,6 +3,7 @@ package br.com.ramon.barros.repo.controllers;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -39,7 +40,14 @@ public class GitController {
 	
 	@GetMapping
 	public ResponseEntity<List<File>> findDirectory(){
-		String directory = "\\app\\tmp";
+		try {
+			Path dir = Files.createTempDirectory("tmp");
+			log.info(">>>>>>>>>>>>>>>>>>>>>> Temp Dir: "+ dir);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		String directory = System.getProperty("user.dir");
 		File f = new File(directory);
 		try {
 			Files.createTempDirectory(directory);
