@@ -18,6 +18,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Service;
 
 import br.com.ramon.barros.repo.dto.FileDTO;
+import br.com.ramon.barros.repo.exceptions.RepositoryException;
 import br.com.ramon.barros.repo.utils.GitUtil;
 
 @Service
@@ -36,11 +37,9 @@ public class GitService {
 				listFiles.addAll(mapFiles.get(key));
 			}
 			return listFiles;
-		} catch (IOException | InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (IOException | InterruptedException | AssertionError e) {
+			throw new RepositoryException("Repository not found! Please verify is url is correct!", e.getCause());
 		}
-		return null;
 	}
 
 	private File cloneRepository(String url, String name) throws IOException, InterruptedException {
