@@ -23,26 +23,36 @@ import br.com.ramon.barros.repo.utils.GitUtil;
 @Service
 public class GitService {
 
-	public HashMap<String, List<FileDTO>> cloneRepository(String url) {
+	public List<FileDTO> findFiles(String url) {
 		String[] values = url.split("/");
 		String name = values[values.length - 1].replace(".git", "");
 		
 		try {
-			Path dir = Files.createTempDirectory("tmp");
-			String directoryPath = dir.toString()+"\\" + name;
-			Path directory = Paths.get(directoryPath);
-			
-			File file = new File(directoryPath);
-			if (!file.exists()) {
-				GitUtil.gitClone(directory, url);
-			}
+			File file = cloneRepository(url, name);
 			HashMap<String, List<FileDTO>> mapFiles = new HashMap<>();
-			return searchListFiles(file, mapFiles);
+			searchListFiles(file, mapFiles);
+			List<FileDTO> listFiles = new ArrayList<>();
+			for(String key : mapFiles.keySet()) {
+				listFiles.addAll(mapFiles.get(key));
+			}
+			return listFiles;
 		} catch (IOException | InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	private File cloneRepository(String url, String name) throws IOException, InterruptedException {
+		Path dir = Files.createTempDirectory("tmp");
+		String directoryPath = dir.toString()+"\\" + name;
+		Path directory = Paths.get(directoryPath);
+		
+		File file = new File(directoryPath);
+		if (!file.exists()) {
+			GitUtil.gitClone(directory, url);
+		}
+		return file;
 	}
 
 	private HashMap<String, List<FileDTO>> searchListFiles(File file, HashMap<String, List<FileDTO>> mapFiles) {

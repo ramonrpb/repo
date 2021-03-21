@@ -1,20 +1,11 @@
 package br.com.ramon.barros.repo.controllers;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,42 +26,10 @@ public class GitController {
 	@Autowired
 	private GitService gitService;
 	
-//	@PutMapping
-//	public ResponseEntity<HashMap<String, List<FileDTO>>> findFiles(@RequestBody RepositoryDTO dto) {
-//		HashMap<String, List<FileDTO>> mapFiles = gitService.cloneRepository(dto.getUrl());
-//		return ResponseEntity.ok().body(mapFiles);
-//	}
-	
 	@PutMapping
 	public ResponseEntity<List<FileDTO>> findFiles(@RequestBody RepositoryDTO dto) {
-		HashMap<String, List<FileDTO>> mapFiles = gitService.cloneRepository(dto.getUrl());
-		List<FileDTO> lista = new ArrayList<>();
-		for(String key : mapFiles.keySet()) {
-			lista.addAll(mapFiles.get(key));
-		}
+		List<FileDTO> lista = gitService.findFiles(dto.getUrl());
 		return ResponseEntity.ok().body(lista);
 	}
 	
-	@GetMapping
-	public ResponseEntity<List<File>> findDirectory(){
-		List<File> list = null;
-		try {
-			Path dir = Files.createTempDirectory("tmp");
-			log.info(">>>>>>>>>>>>>>>>>>>>>> Temp Dir: "+ dir);
-			log.info(">>>>>>>>>>>>>>>>>>>>>> Temp Dir: "+ dir.getParent().toString());
-			File f = new File(dir.getParent().toString());
-			list = Arrays.asList(f.listFiles());
-	        
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
-        return ResponseEntity.ok().body(list);
-	}
-	
-//	@GetMapping
-//	public ResponseEntity<String> findDirectory(){
-//        return ResponseEntity.ok().body("Olá Mundo!!!");
-//	}
 }

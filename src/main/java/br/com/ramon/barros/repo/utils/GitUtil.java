@@ -17,7 +17,6 @@ public class GitUtil {
 	}
 	
 	public static void runCommand(Path directory, String... command) throws IOException, InterruptedException {
-//		Objects.requireNonNull(directory, "directory");
 		if (!Files.exists(directory)) {
 			Files.createDirectory(directory);
 		}
@@ -33,7 +32,7 @@ public class GitUtil {
 		commandReader.join();
 		outputReader.join();
 		if (exit != 0) {
-			throw new AssertionError(String.format("runCommand returned %d", exit));
+			throw new AssertionError(String.format("Git command returned %d", exit));
 		}
 	}
 	
