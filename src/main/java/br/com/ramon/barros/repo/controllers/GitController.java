@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Logger;
@@ -34,10 +35,20 @@ public class GitController {
 	@Autowired
 	private GitService gitService;
 	
+//	@PutMapping
+//	public ResponseEntity<HashMap<String, List<FileDTO>>> findFiles(@RequestBody RepositoryDTO dto) {
+//		HashMap<String, List<FileDTO>> mapFiles = gitService.cloneRepository(dto.getUrl());
+//		return ResponseEntity.ok().body(mapFiles);
+//	}
+	
 	@PutMapping
-	public ResponseEntity<HashMap<String, List<FileDTO>>> findFiles(@RequestBody RepositoryDTO dto) {
+	public ResponseEntity<List<FileDTO>> findFiles(@RequestBody RepositoryDTO dto) {
 		HashMap<String, List<FileDTO>> mapFiles = gitService.cloneRepository(dto.getUrl());
-		return ResponseEntity.ok().body(mapFiles);
+		List<FileDTO> lista = new ArrayList<>();
+		for(String key : mapFiles.keySet()) {
+			lista.addAll(mapFiles.get(key));
+		}
+		return ResponseEntity.ok().body(lista);
 	}
 	
 	@GetMapping
@@ -57,4 +68,9 @@ public class GitController {
 		
         return ResponseEntity.ok().body(list);
 	}
+	
+//	@GetMapping
+//	public ResponseEntity<String> findDirectory(){
+//        return ResponseEntity.ok().body("Olá Mundo!!!");
+//	}
 }
