@@ -11,6 +11,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
@@ -36,16 +37,28 @@ public class GitService {
 			for(String key : mapFiles.keySet()) {
 				listFiles.addAll(mapFiles.get(key));
 			}
+			File tempFile = new File(file.getAbsolutePath().replace(name, ""));
+			deleteDirectoryStream(tempFile.toPath());
+			
 			return listFiles;
 		} catch (IOException | InterruptedException | AssertionError e) {
 			throw new RepositoryException("Repository not found! Please verify is url is correct!", e.getCause());
 		}
 	}
 
+	private void deleteDirectoryStream(Path path) throws IOException {
+		  Files.walk(path)
+		    .sorted(Comparator.reverseOrder())
+		    .map(Path::toFile)
+		    .forEach(File::delete);
+	}
+	
 	private File cloneRepository(String url, String name) throws IOException, InterruptedException {
 		Path dir = Files.createTempDirectory("tmp");
 		String directoryPath = dir.toString()+"\\" + name;
 		Path directory = Paths.get(directoryPath);
+		
+		System.out.println(directoryPath);
 		
 		File file = new File(directoryPath);
 		if (!file.exists()) {
