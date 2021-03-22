@@ -37,8 +37,7 @@ public class GitService {
 			for(String key : mapFiles.keySet()) {
 				listFiles.addAll(mapFiles.get(key));
 			}
-			File tempFile = new File(file.getAbsolutePath().replace(name, ""));
-			deleteDirectoryStream(tempFile.toPath());
+			deleteDirectoryStream(file.toPath());
 			
 			return listFiles;
 		} catch (IOException | InterruptedException | AssertionError e) {
