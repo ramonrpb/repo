@@ -1,9 +1,10 @@
-Doma  with Spring Boot
+Spring Boot Starter
 ========================================
 
 This project reads files in github repository  [Spring Boot][spring-boot] .
 
 Java 8 is needed to run this sample.
+Spring boot 2.3.9.RELEASE
 
 Clone
 --------
