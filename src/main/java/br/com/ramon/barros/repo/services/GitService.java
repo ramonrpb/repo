@@ -58,8 +58,6 @@ public class GitService {
 		String directoryPath = dir.toString()+"\\" + name;
 		Path directory = Paths.get(directoryPath);
 		
-		System.out.println(directoryPath);
-		
 		File file = new File(directoryPath);
 		if (!file.exists()) {
 			GitUtil.gitClone(directory, url);
