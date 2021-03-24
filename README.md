@@ -1,7 +1,7 @@
 Spring Boot Starter
 ========================================
 
-This project reads files in github repository  [Spring Boot][spring-boot] .
+This project reads files in github repository  [Spring Boot] .
 
 Java 8 is needed to run this sample.
 Spring boot 2.3.9.RELEASE
@@ -20,7 +20,19 @@ Access
 ### Read repository - Method PUT
 
 ```
+URLs
+--------
 http://localhost:8080/repo/git
+
+Swagger
+--------
+http://localhost:8080/repo/swagger-ui.html
+https://repo-rpb.herokuapp.com/repo/swagger-ui.html
+
+Heroku
+--------
+https://repo-rpb.herokuapp.com/repo/git
+
 ```
 ### Body 
 
